@@ -1,3 +1,5 @@
+
+<?php include("db.php"); ?>
 <header>
     <div class="blog-masthead">
         <div class="container">

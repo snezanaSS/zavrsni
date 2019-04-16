@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -8,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="../../../../favicon.ico">
-  
+
     <title>Vivify Blog</title>
 
     <!-- Bootstrap core CSS -->
@@ -17,27 +16,29 @@
     <!-- Custom styles for this template -->
     <link href="styles/blog.css" rel="stylesheet">
     <link href="styles/styles.css" rel="stylesheet">
+
 </head>
 
 <body>
 
-<?php include('header.php'); ?>
+<?php include("header.php"); ?>
 
 <main role="main" class="container">
 
     <div class="row">
-<?php include('posts.php'); ?>
-        <!-- /.blog-post -->
+
+        <div class="col-sm-8 blog-main">
+
+            <?php include('posts.php'); ?>
 
             <nav class="blog-pagination">
                 <a class="btn btn-outline-primary" href="#">Older</a>
                 <a class="btn btn-outline-secondary disabled" href="#">Newer</a>
             </nav>
 
-        </div><!-- /.blog-main -->
+</div><!-- /.blog-main -->
 
-       <?php include('sidebar.php'); ?>
-       <!-- /.blog-sidebar -->
+<?php include('sidebar.php'); ?><!-- /.blog-sidebar -->
 
     </div><!-- /.row -->
 
@@ -46,3 +47,4 @@
 <?php include('footer.php'); ?>
 </body>
 </html>
+
