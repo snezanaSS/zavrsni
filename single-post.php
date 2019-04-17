@@ -2,7 +2,8 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-include("db.php"); ?>
+include("db.php"); 
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -20,7 +21,7 @@ include("db.php"); ?>
 
     <!-- Custom styles for this template -->
     <link href="styles/blog.css" rel="stylesheet">
-    <link href="styles/styles.css" rel="stylesheet">
+    <link href="styles/style.css" rel="stylesheet">
 
 </head>
 
@@ -34,7 +35,6 @@ include("db.php"); ?>
 ?>
 
 <body>
-
 
 <?php include("header.php"); ?>
 
@@ -50,12 +50,15 @@ include("db.php"); ?>
 
                 <p><?php echo ($singlePost['body']); ?></p>
             </div><!-- /.blog-post -->
-            <form method='POST' action="index.php" >
-                <input type="text" placeholder="Author" style='display: block; margin-bottom: 10px ' >
-                <textarea name="comment" placeholder="Insert comment here" cols="50" rows="5" style='display:block; padding: 10px'></textarea>
-                <input class='btn btn-default' type="submit" value='Submit'style="margin-top: 15px; margin-bottom: 15px">
+
+            <form method="POST" action="create-comment.php" >
+                <input name="author" type="text" placeholder="Author" style="display:block; margin-bottom:1rem; padding:0.5rem"/>
+                <textarea name="comment" rows="5" cols="70" placeholder="Comment" style="display:block; margin-bottom:1rem"></textarea>
+                <input type="hidden" value="<?php echo $_GET['post_id']; ?>" name="id"/>
+                <input class="btn btn-default" type="submit" value="Submit">
             </form>
 
+            <hr>
             <?php include('comments.php'); ?>
         </div><!-- /.blog-main -->
 
