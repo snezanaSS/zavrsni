@@ -12,7 +12,7 @@ $statementComments->setFetchMode(PDO::FETCH_ASSOC);
 
 $comments = $statementComments->fetchAll();
 ?>
-<button class="btn btn-default" id="button" onclick="myFunction()">Hide Comments</button>
+<button class="btn btn-default" onclick="delete()" id="button" onclick="myFunction()">Hide Comments</button>
 
 
 
@@ -20,8 +20,14 @@ $comments = $statementComments->fetchAll();
 <ul id='hide'>
 <?php foreach($comments as $comment){ ;?>
     <li>
+
         <h6><?php echo($comment['author']); ?></h6>
         <p><?php echo($comment['text']); ?></p>
+        <form method="GET" action="delete-comment.php" >
+            <button id="delete" class="btn btn-default">Delete</button>
+            <input type="hidden" value="<?php echo $comment['id']; ?>" name="id"/>
+            <input type="hidden" value="<?php echo $comment['post_id']; ?>" name="post_id"/>
+        </form>
     </li>
 <hr>
 <?php } ;?>

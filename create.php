@@ -1,9 +1,3 @@
-<?php 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-include("db.php"); 
-?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -25,15 +19,6 @@ include("db.php");
 
 </head>
 
-<?php
-    $sql = "SELECT posts.id, posts.title, posts.created_at, posts.author, posts.body
-    FROM posts WHERE posts.id = {$_GET['post_id']} ";
-    $statement = $connection->prepare($sql);
-    $statement->execute();
-    $statement->setFetchMode(PDO::FETCH_ASSOC);
-    $singlePost = $statement->fetchAll()[0];
-?>
-
 <body>
 
 <?php include("header.php"); ?>
@@ -43,36 +28,26 @@ include("db.php");
     <div class="row">
 
         <div class="col-sm-8 blog-main">
-
-            <div class="blog-post">
-                <a href= "single-post.php?post_id=<?php echo($singlePost['id']) ?>"><h2 class="blog-post-title"><?php echo ($singlePost['title']); ?></h2></a>
-                <p class="blog-post-meta"><?php echo ($singlePost['created_at']); ?> by <a href="#"><?php echo ($singlePost['author']); ?></a></p>
-
-                <p><?php echo ($singlePost['body']); ?></p>
-            </div><!-- /.blog-post -->
-
-            <?php
+        <?php
                 $error = '';
                 if ($_SERVER['REQUEST_METHOD'] === 'GET' && !empty($_GET['required'])) {
                     $error = "All field are required";
                 }
             ?>
-            <form method="POST" action="create-comment.php" >
+            <form method="POST" action="create-post.php" >
                 <?php if (!empty($error)) {?>
                     <span class="alert alert-danger"><?php echo $error ; ?></span>
                     <hr/>
                 <?php } ?>
                 <input id="author" name="author" type="text" placeholder="Author" style="display:block; margin-bottom:1rem; padding:0.5rem"/>
-                <textarea id="comment" name="comment" rows="5" cols="70" placeholder="Comment" style="display:block; margin-bottom:1rem"></textarea>
-                <input type="hidden" value="<?php echo $_GET['post_id']; ?>" name="id"/>
+                <input id="author" name="title" type="text" placeholder="Title" style="display:block; margin-bottom:1rem; padding:0.5rem"/>
+                <textarea id="body" name="body" rows="5" cols="70" placeholder="Text" style="display:block; margin-bottom:1rem"></textarea>
                 <input class="btn btn-default" type="submit" value="Submit">
             </form>
 
-            <hr>
-            <?php include('comments.php'); ?>
-        </div><!-- /.blog-main -->
+</div><!-- /.blog-main -->
 
-        <?php include('sidebar.php'); ?><!-- /.blog-sidebar -->
+<?php include('sidebar.php'); ?><!-- /.blog-sidebar -->
 
     </div><!-- /.row -->
 
